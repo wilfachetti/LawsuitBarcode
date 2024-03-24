@@ -2,7 +2,7 @@ package br.com.lievo.codbarras;
 
 public class VerificaDig {
 	
-	private static boolean valida_mod97(long NNNNNNN, long DD,long AAAA, long JTR, long OOOO) {
+	private static boolean validaMod97(long NNNNNNN, long DD,long AAAA, long JTR, long OOOO) {
 		String valor1 = "";
 		long resto1 = 0;
 		String valor2 = "";
@@ -35,7 +35,7 @@ public class VerificaDig {
 		AAAA = Long.parseLong(numero.substring(11, 15));
 		JTR = Long.parseLong(numero.substring(16, 17) + numero.substring(18, 20));
 		OOOO = Long.parseLong(numero.substring(21, 25));
-		return valida_mod97(NNNNNNN, DD, AAAA, JTR, OOOO);
+		return validaMod97(NNNNNNN, DD, AAAA, JTR, OOOO);
 	}	
 	
 	public static String nCompleto(String numero){
