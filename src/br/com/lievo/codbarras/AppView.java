@@ -1,6 +1,7 @@
 package br.com.lievo.codbarras;
 
 import java.text.ParseException;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -100,9 +101,6 @@ public class AppView {
             maskTF.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent arg0) {
-                    //maskTF.requestFocus();  				
-                    //maskTF.setSelectionStart(0);
-                    //maskTF.setSelectionEnd(maskTF.getText().length());
                     maskTF.setText(maskTF.getText());  
                     maskTF.selectAll();
                 }
@@ -117,7 +115,7 @@ public class AppView {
             frame.getContentPane().add(maskTF);
             
             imageCodBar.setBounds(21, 91, 195, 50);		
-            imageCodBar.setTransferHandler(new ImageSelection());
+            //imageCodBar.setTransferHandler(new ImageSelection());
             imageCodBar.setPreferredSize(new Dimension(195, 50));
             frame.getContentPane().add(imageCodBar);
             
@@ -136,29 +134,6 @@ public class AppView {
             btnGerar.setForeground(Color.WHITE);
             btnGerar.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
             btnGerar.setBounds(234, 31, 103, 23);
-           
-           
-            /*
-            btnGerar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e){	
-                    try{
-                    if(VerificaDig.validaNum(maskTF.getText())){
-                        label.setIcon(null);
-                        label.setIcon(Intercalado2de5.criarImagem(VerificaDig.nCompleto(maskTF.getText()), maskTF.getText()));
-                        btnCopiar.requestFocus();
-                    }else{
-                        label.setIcon(null);
-                        JOptionPane.showMessageDialog(null,"PROCESSO INVÁLIDO");   
-                        maskTF.requestFocus();
-                    }
-                    }catch(Exception nIncorreto){
-                        JOptionPane.showMessageDialog(null, "Este número, não é um número de processo válido!");
-                        maskTF.requestFocus();
-                    }
-                }
-            });
-            */
-
             btnGerar.addKeyListener(new KeyListener() {
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyChar()==KeyEvent.VK_ENTER)
@@ -184,22 +159,6 @@ public class AppView {
             btnCopiar.setForeground(Color.WHITE);   
             btnCopiar.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
             btnCopiar.setBounds(234, 64, 103, 23);
-            
-            
-            
-            /*
-            btnCopiar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    try{
-                        TransferHandler handler = label.getTransferHandler();				
-                        handler.exportToClipboard(label, clipboard, TransferHandler.COPY);
-                        maskTF.requestFocus();
-                    }catch(Exception copia){
-                        JOptionPane.showMessageDialog(null, "Não há dados para Copiar. Primeiro tente converter um número!");
-                    }
-                }
-            });
-            */
             btnCopiar.addKeyListener(new KeyListener() {
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyChar()==KeyEvent.VK_ENTER){
@@ -264,7 +223,7 @@ public class AppView {
                     
             frame.setVisible(true);    	
         } catch (ParseException ex) {
-            
+            Logger.getLogger(getClass().getName()).log(null, null, ex);
         }
     }        
 }

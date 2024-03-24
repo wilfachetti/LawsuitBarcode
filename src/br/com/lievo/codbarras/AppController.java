@@ -25,7 +25,7 @@ public class AppController {
 							appView.getBtnCopiar().requestFocus();
 						} else {
 							appView.getImageCodBar().setIcon(null);
-							appView.showMessage("PROCESSO INVÁLIDO");   
+							appView.showMessage("Número de processo inválido!");   
 							appView.getMaskTF().requestFocus();
 						}
                     } catch(Exception nIncorreto){
@@ -39,15 +39,16 @@ public class AppController {
 		appView.getBtnCopiar().addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     try{
-                        TransferHandler handler = appView.getMaskTF().getTransferHandler();				
-                        handler.exportToClipboard(appView.getMaskTF(), appView.getClipboard(), TransferHandler.COPY);
+                        appView.getImageCodBar().setTransferHandler(new ImageSelection());
+                        
+                        TransferHandler transferHandler = appView.getImageCodBar().getTransferHandler();	
+                        transferHandler.exportToClipboard(appView.getImageCodBar(), appView.getClipboard(), TransferHandler.COPY);
+                        
                         appView.getMaskTF().requestFocus();
                     }catch(Exception copia){
                         appView.showMessage("Não há dados para Copiar. Primeiro, tente converter um número!");
                     }
                 }
 		});
-
     }
-         
 }
