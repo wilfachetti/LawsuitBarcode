@@ -18,18 +18,16 @@ public class Intercalado2de5 {
 	    					"00011",//7
 	    					"10010",//8 
 	    					"01010"};//9
-	    String codigoFinal;
-	    int counter1, counter2;
-
-	    codigoFinal = "0000";
+							
+		int counter1, counter2;	
+		String codigoFinal = "0000";
 
 	    for(counter1 = 0; counter1 < (lawsuitNumber.length()/2); counter1++){ 
 	    	int firstNumber = Integer.parseInt(lawsuitNumber.substring(counter1 * 2, counter1 * 2 + 1));
 	    	int secondNumber = Integer.parseInt(lawsuitNumber.substring(counter1 * 2 + 1, counter1 * 2 + 2));
 	        
-			for(counter2 = 0; counter2 <= 4; counter2++){
+			for(counter2 = 0; counter2 <= 4; counter2++)
 	        	codigoFinal = codigoFinal + digito[firstNumber].charAt(counter2) + digito[secondNumber].charAt(counter2);
-	        }
 	    }
 
 	    codigoFinal += "100";

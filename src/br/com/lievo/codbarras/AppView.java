@@ -36,7 +36,6 @@ public class AppView {
     private Icon icon = new ImageIcon("codBarras.jpg");
 	private JLabel imageCodBar = new JLabel(icon);
 	private JButton btnGerar, btnCopiar, btnSair;
-	private int xPosn, yPosn, xScr, yScr;
 	
     public Clipboard getClipboard() {
         return frame.getToolkit().getSystemClipboard();
@@ -64,7 +63,7 @@ public class AppView {
 
 	public void montaFormulario(){
         try {
-            frame = new JFrame("Código de Barras - Processos Judiciais");
+            frame = new JFrame("Código de Barras - Processos");
             frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Application.class.getResource("../img/Settings.png")));
             frame.getContentPane().setLayout(null);
             frame.setSize(350, 200);
@@ -73,26 +72,22 @@ public class AppView {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setUndecorated(true);
             frame.getContentPane().setBackground(Color.BLACK);
-            frame.getContentPane().addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    xPosn = e.getX(); 
-                    yPosn = e.getY(); 	
-                }
-            });
-            frame.getContentPane().addMouseMotionListener(new MouseMotionAdapter() {
-                @Override
-                public void mouseDragged(MouseEvent e){ 
-                    xScr += (e.getX() - xPosn);
-                    yScr += (e.getY() - yPosn);
-                    frame.setLocation(xScr, yScr);
-                }    
-            });		
+
+            JLabel image = new JLabel();
+            image.setBounds(5, 0, 18, 23);
+            image.setIcon(new ImageIcon(Application.class.getResource("../img/Settings16.png")));
+            frame.getContentPane().add(image);
             
             Border borda = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1);
-            
-            MaskFormatter mask;
-            mask = new MaskFormatter("#######-##.####.#.##.####");
+            JLabel barraTitulo = new JLabel();
+            barraTitulo.setBounds(0, 0, 350, 21);
+            barraTitulo.setBorder(borda);    	
+            barraTitulo.setForeground(Color.WHITE);
+            barraTitulo.setFont(new Font("Arial", Font.BOLD, 16));
+            barraTitulo.setText("      Código de Barras - Processos");
+            frame.getContentPane().add(barraTitulo);
+
+            MaskFormatter mask = new MaskFormatter("#######-##.####.#.##.####");
             mask.setPlaceholderCharacter('_');		
             
             maskTF = new JFormattedTextField(mask);
@@ -114,8 +109,7 @@ public class AppView {
             });
             frame.getContentPane().add(maskTF);
             
-            imageCodBar.setBounds(21, 91, 195, 50);		
-            //imageCodBar.setTransferHandler(new ImageSelection());
+            imageCodBar.setBounds(21, 91, 195, 50);
             imageCodBar.setPreferredSize(new Dimension(195, 50));
             frame.getContentPane().add(imageCodBar);
             
@@ -200,27 +194,14 @@ public class AppView {
             });
             frame.getContentPane().add(btnSair);
             
-            JLabel barraTitulo = new JLabel();
-            barraTitulo.setBounds(0, 0, 350, 21);
-            barraTitulo.setBorder(borda);    	
-            barraTitulo.setForeground(Color.WHITE);
-            barraTitulo.setFont(new Font("Arial", Font.BOLD, 16));
-            barraTitulo.setText("      Código de Barras - Processos");
-            frame.getContentPane().add(barraTitulo);
-            
             JLabel statusbar = new JLabel();
             statusbar.setBounds(0, 183, 350, 17);
             statusbar.setBorder(borda);    	
             statusbar.setForeground(Color.LIGHT_GRAY);
             statusbar.setFont(new Font(null, Font.BOLD, 11)); 
-            statusbar.setText("  by   Willian Oliveira - COINF - Ji-Paraná/RO");
+            statusbar.setText("  by   Willian Fachetti");
             frame.getContentPane().add(statusbar);
-            
-            JLabel label_1 = new JLabel("New label");
-            label_1.setBounds(5, 0, 18, 23);
-            label_1.setIcon(new ImageIcon(Application.class.getResource("../img/Settings16.png")));
-            frame.getContentPane().add(label_1);
-                    
+                       
             frame.setVisible(true);    	
         } catch (ParseException ex) {
             Logger.getLogger(getClass().getName()).log(null, null, ex);

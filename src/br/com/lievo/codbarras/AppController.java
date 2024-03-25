@@ -1,5 +1,6 @@
 package br.com.lievo.codbarras;
 
+import javax.swing.ImageIcon;
 import javax.swing.TransferHandler;
 
 import java.awt.event.ActionEvent;
