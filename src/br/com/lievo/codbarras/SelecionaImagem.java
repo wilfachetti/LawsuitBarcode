@@ -5,6 +5,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -26,9 +27,9 @@ class ImageSelection extends TransferHandler implements Transferable {
 		if (!(comp instanceof JLabel))
 			return false;
 
-		for (int i = 0, n = flavor.length; i < n; i++) {
-			for (int j = 0, m = flavors.length; j < m; j++)
-				if (flavor[i].equals(flavors[j]))
+		for (int counter1 = 0, length1 = flavor.length; counter1 < length1; counter1++) {
+			for (int counter2 = 0, length2 = flavors.length; counter2 < length2; counter2++)
+				if (flavor[counter1].equals(flavors[counter2]))
 					return true;
 		}
 
@@ -50,7 +51,6 @@ class ImageSelection extends TransferHandler implements Transferable {
 		}
 		return null;
 	}
-
 	@Override
 	public boolean importData(JComponent comp, Transferable t) {
 		if (comp instanceof JLabel) {
@@ -63,14 +63,16 @@ class ImageSelection extends TransferHandler implements Transferable {
 					label.setIcon(icon);
 					return true;
 				} catch (UnsupportedFlavorException ignored) {
+					Logger.getLogger(getClass().getName()).log(null, null, ignored);
 				} catch (IOException ignored) {
+					Logger.getLogger(getClass().getName()).log(null, null, ignored);
 				}
 			}
 		}
-
+		
 		return false;
 	}
-
+	
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
 		return flavors;
